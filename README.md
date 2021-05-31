@@ -1,5 +1,5 @@
 # Kraken Invoicing
-Kraken Invoicing es una gema para interactuar con la API de facturación de Kraken Bolivia en aplicaciones de Ruby o de Ruby on Rails.
+Kraken Invoicing es una gema para interactuar con la API de facturación de Kraken Bolivia en aplicaciones de Ruby o de Ruby on Rails. Fue hecha como extensión de la integración de Kraken para [PetServi](https://petservi.com.bo "PetServi: pet shop de mascotas en Santa Cruz, Bolivia").
 
 Antes de utilizar esta gema necesitas contratar el servicio de Kraken y obtener credenciales de integración de prueba, de lo contrario no podrás utilizar *Kraken Invoicing* para facturar.
 
@@ -27,8 +27,8 @@ Con esto podemos acceder a, por ejemplo, KrakenInvoicing.configuration.endpoint 
 ## Uso de la gema para hacer peticiones
 Para hacer peticiones usando esta gema necesitamos instanciar un cliente usando:
 
-```
-client = KrakenInvoicing::Client.new()
+```ruby
+client = KrakenInvoicing::Client.new(token) # Instanciamos un nuevo cliente de Kraken pasándole el JWT con el que nos autenticaremos
 client.branches # Devuelve todas las sucursales del negocio
 client.invoice(invoice_id) # Devuelve toda la información acerca de una factura
 client.invoice_pdf(invoice_id) # Devuelve una factura en específico en formato PDF
