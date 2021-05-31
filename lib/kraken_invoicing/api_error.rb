@@ -16,8 +16,8 @@ module KrakenInvoicing
 
   # It should be raised when the API call returns a 400 Error Code
   class BadRequestError < ApiError
-
   end
+
   # It should be raised when the API call returns a 401 Error Code
   class UnauthorizedError < ApiError
   end
@@ -31,6 +31,9 @@ module KrakenInvoicing
   end
 
   # It should be raised when the API call returns a 429 Error Code
-  class UnprocessableEntity < ApiError
+  class UnprocessableEntityError < ApiError
+  end
+
+  class TokenMissingError < ApiError
   end
 end

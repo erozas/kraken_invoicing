@@ -2,9 +2,10 @@
 
 require "kraken_invoicing/version"
 require "kraken_invoicing/api_error"
-require "kraken_invoicing/client"
 require "kraken_invoicing/configuration"
+require "kraken_invoicing/client"
 require "kraken_invoicing/http_status_codes"
+
 
 module KrakenInvoicing
   class << self
