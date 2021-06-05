@@ -17,6 +17,7 @@ module KrakenInvoicing
     # @return [String]
     attr_accessor :client_secret
 
+
     def initialize
       @api_endpoint = nil
       @client_id = nil

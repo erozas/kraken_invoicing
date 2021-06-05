@@ -4,9 +4,10 @@ require 'faraday'
 require 'oj'
 require 'json'
 
+API_ENDPOINT = KrakenInvoicing.configuration.api_endpoint
+
 module KrakenInvoicing
   class Client
-    API_ENDPOINT = "https://linkel.kraken.bo:8443"
     
     attr_reader :auth_token
 
@@ -37,6 +38,9 @@ module KrakenInvoicing
     
     def invoice(invoice_id)
       request(http_method: :get, endpoint: "/api/invoices/#{invoice_id}")
+    end
+
+    def create_invoice(invoice_params)
     end
 
     def invoice_pdf(invoice_id)

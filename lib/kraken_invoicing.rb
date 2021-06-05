@@ -17,3 +17,9 @@ module KrakenInvoicing
     yield(configuration)
   end
 end
+
+KrakenInvoicing.configure do |config|
+  config.api_endpoint = "https://linkel.kraken.bo:8443"
+  config.client_id = "petservice"
+  config.client_secret = "admin"
+end
