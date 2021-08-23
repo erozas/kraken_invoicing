@@ -4,20 +4,19 @@ require 'faraday'
 require 'oj'
 require 'json'
 
-API_ENDPOINT = KrakenInvoicing.configuration.api_endpoint
-
 module KrakenInvoicing
   class Client
     
-    attr_reader :auth_token
+    attr_accessor :auth_token
 
     def initialize(auth_token = nil)
-      raise TokenMissingError if !auth_token
-      @auth_token = auth_token
+      @auth_token = auth_token || authenticate_and_return_auth_token
     end
-
-    def authenticate
-      response = request(http_method: :post, endpoint: "/api/authenticate", params: { username: "petservice", password: "admin" })
+    
+    def authenticate_and_return_auth_token
+      auth_token = authenticate["id_token"]
+      client.headers['Authorization'] = "Bearer #{auth_token}"
+      auth_token
     end
 
     def branches
@@ -41,6 +40,7 @@ module KrakenInvoicing
     end
 
     def create_invoice(invoice_params)
+      request(http_method: :post, endpoint: "/api/invoices", params: invoice_params)
     end
 
     def invoice_pdf(invoice_id)
@@ -52,10 +52,23 @@ module KrakenInvoicing
     end
 
     private
+    def authenticate
+      response = client.post("/api/authenticate", auth_params.to_json)
+      Oj.load(response.body)
+    end
+
+    def auth_params
+      {
+        username: KrakenInvoicing.configuration.client_id,
+        password: KrakenInvoicing.configuration.client_secret,
+        remember_me: true
+      }
+    end
+    
     def client
-      @_client ||= Faraday.new(API_ENDPOINT) do |client|
+      @_client ||= Faraday.new(KrakenInvoicing.configuration.api_endpoint) do |client|
         client.request :url_encoded
-        client.headers['Authorization'] = "Bearer #{@auth_token}"
+        client.headers['Authorization'] = "Bearer #{auth_token}"
         client.headers['Content-Type'] = "application/json"
         puts client.headers
         client.adapter Faraday.default_adapter
@@ -64,7 +77,9 @@ module KrakenInvoicing
 
     def request(http_method: , endpoint:, params: {})
       params = params.to_json if params.any?
+      puts client
       response = client.public_send(http_method, endpoint, params)
+
       if params["binary"]
         parsed_response = response.body 
       else
@@ -77,7 +92,7 @@ module KrakenInvoicing
     end
 
     def response_successful?(response)
-      response.status == HttpStatusCodes::HTTP_OK_CODE
+     [HttpStatusCodes::HTTP_OK_CODE, HttpStatusCodes::HTTP_CREATED_CODE].include?(response.status)
     end
 
     def error_class(response)
