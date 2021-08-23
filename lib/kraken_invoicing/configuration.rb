@@ -17,11 +17,18 @@ module KrakenInvoicing
     # @return [String]
     attr_accessor :client_secret
 
+    # A boolean that tells the Kraken's backend if the auth_token should
+    # persist beyond a given amount of time.
+    # defaults to: nil
+    # @return [Boolean]
+    attr_accessor :remember_me
+
 
     def initialize
       @api_endpoint = nil
       @client_id = nil
       @client_secret = nil
+      @remember_me = nil
     end
   end
 end

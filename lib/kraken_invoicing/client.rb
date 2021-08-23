@@ -61,7 +61,7 @@ module KrakenInvoicing
       {
         username: KrakenInvoicing.configuration.client_id,
         password: KrakenInvoicing.configuration.client_secret,
-        remember_me: true
+        remember_me: KrakenInvoicing.configuration.remember_me
       }
     end
     
