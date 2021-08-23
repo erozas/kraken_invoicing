@@ -14,7 +14,7 @@ Además de esto, necesitamos un *API_ENDPOINT* que es el endpoint de Kraken cont
 
 Para pasar esta información usamos el método *.configure* de la clase KrakenInvoicing antes de instanciar el cliente. 
 
-```
+```ruby
 KrakenInvoicing.configure do |config|
   config.api_endpoint = 'https://endpoint-suministrado-por-kraken.com'
   config.cliend_id = 'id_de_cliente_suministrador_por_kraken'
