@@ -70,7 +70,6 @@ module KrakenInvoicing
         client.request :url_encoded
         client.headers['Authorization'] = "Bearer #{auth_token}"
         client.headers['Content-Type'] = "application/json"
-        puts client.headers
         client.adapter Faraday.default_adapter
       end
     end
