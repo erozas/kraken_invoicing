@@ -10,7 +10,7 @@ module KrakenInvoicing
     attr_accessor :auth_token
 
     def initialize(auth_token = nil)
-      @auth_token = auth_token || authenticate_and_return_auth_token
+      @auth_token = auth_token || KrakenInvoicing.configuration.auth_token || authenticate_and_return_auth_token
     end
     
     def authenticate_and_return_auth_token
