@@ -48,7 +48,7 @@ module KrakenInvoicing
     end
 
     def email_invoice(invoice_id, email)
-      response = client.public_send(:get, "/api/invoices/#{email}/#{invoice_id}/send_mail", {})
+      client.public_send(:get, "/api/invoices/#{email}/#{invoice_id}/send_mail", {})
     end
 
     private
@@ -64,7 +64,7 @@ module KrakenInvoicing
         remember_me: KrakenInvoicing.configuration.remember_me
       }
     end
-    
+
     def client
       @_client ||= Faraday.new(KrakenInvoicing.configuration.api_endpoint) do |client|
         client.request :url_encoded
