@@ -23,7 +23,6 @@ module KrakenInvoicing
     # @return [Boolean]
     attr_accessor :remember_me
 
-
     def initialize
       @api_endpoint = nil
       @client_id = nil
