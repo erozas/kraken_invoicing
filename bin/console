@@ -12,7 +12,7 @@ require "kraken_invoicing"
 # Pry.start
 
 KrakenInvoicing.configure do |config|
-  config.api_endpoint = "https://linkel.kraken.bo:8443"
+  config.api_endpoint = ENV["KRAKEN_API_ENDPOINT"]
   config.client_id = ENV["KRAKEN_CLIENT_ID"]
   config.client_secret = ENV["KRAKEN_CLIENT_SECRET"]
   config.remember_me = true
