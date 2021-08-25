@@ -13,6 +13,7 @@ require "kraken_invoicing"
 
 KrakenInvoicing.configure do |config|
   config.api_endpoint = ENV["KRAKEN_API_ENDPOINT"]
+  config.auth_token = ENV["KRAKEN_AUTH_TOKEN"]
   config.client_id = ENV["KRAKEN_CLIENT_ID"]
   config.client_secret = ENV["KRAKEN_CLIENT_SECRET"]
   config.remember_me = true

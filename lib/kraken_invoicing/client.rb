@@ -6,54 +6,45 @@ require 'json'
 
 module KrakenInvoicing
   class Client
-    
-    attr_accessor :auth_token
+    attr_reader :auth_token, :adapter
 
-    def initialize(auth_token = nil)
+    def initialize(auth_token = nil, adapter: Faraday.default_adapter, stubs: nil)
       @auth_token = auth_token || KrakenInvoicing.configuration.auth_token || authenticate_and_return_auth_token
-    end
-    
-    def authenticate_and_return_auth_token
-      auth_token = authenticate["id_token"]
-      client.headers['Authorization'] = "Bearer #{auth_token}"
-      auth_token
+      @adapter = adapter
+
+      @stubs = stubs
     end
 
     def branches
-      request(http_method: :get, endpoint: "/api/branches")
-    end
-
-    def cycles
-      request(http_method: :get, endpoint: "/api/cycles")
+      BranchesResource.new(self)
     end
 
     def activities
-      request(http_method: :get, endpoint: "/api/economic-activities")
+      ActivitiesResource.new(self)
+    end
+
+    def cycles
+      CyclesResource.new(self)
     end
 
     def invoices
-      request(http_method: :get, endpoint: "/api/invoices")
-    end
-    
-    def invoice(invoice_id)
-      request(http_method: :get, endpoint: "/api/invoices/#{invoice_id}")
+      InvoicesResource.new(self)
     end
 
-    def create_invoice(invoice_params)
-      request(http_method: :post, endpoint: "/api/invoices", params: invoice_params)
-    end
-
-    def invoice_pdf(invoice_id)
-      request(http_method: :get, endpoint: "/api/invoices/#{invoice_id}/pdf", params: { binary: true })
-    end
-
-    def email_invoice(invoice_id, email)
-      client.public_send(:get, "/api/invoices/#{email}/#{invoice_id}/send_mail", {})
+    def connection
+      @connection ||= Faraday.new do |conn|
+        conn.url_prefix = KrakenInvoicing.configuration.api_endpoint
+        conn.request :json
+        conn.response :json, content_type: 'application/json'
+        conn.adapter adapter, @stubs
+      end
     end
 
     private
-    def authenticate
-      response = client.post("/api/authenticate", auth_params.to_json)
+
+    def authenticate_and_return_auth_token
+      headers = { Authorization: "Bearer #{auth_token}" }
+      response = connection.post('/api/authenticate', headers.merge(connection.headers))
       Oj.load(response.body)
     end
 
@@ -62,53 +53,7 @@ module KrakenInvoicing
         username: KrakenInvoicing.configuration.client_id,
         password: KrakenInvoicing.configuration.client_secret,
         remember_me: KrakenInvoicing.configuration.remember_me
-      }
-    end
-
-    def client
-      @_client ||= Faraday.new(KrakenInvoicing.configuration.api_endpoint) do |client|
-        client.request :url_encoded
-        client.headers['Authorization'] = "Bearer #{auth_token}"
-        client.headers['Content-Type'] = "application/json"
-        client.adapter Faraday.default_adapter
-      end
-    end
-
-    def request(http_method: , endpoint:, params: {})
-      params = params.to_json if params.any?
-      puts client
-      response = client.public_send(http_method, endpoint, params)
-
-      if params["binary"]
-        parsed_response = response.body 
-      else
-        parsed_response = Oj.load(response.body)
-      end
-
-      return parsed_response if response_successful?(response)
-
-      raise error_class(response), "Code: #{response.status}, response: #{response.body}"
-    end
-
-    def response_successful?(response)
-     [HttpStatusCodes::HTTP_OK_CODE, HttpStatusCodes::HTTP_CREATED_CODE].include?(response.status)
-    end
-
-    def error_class(response)
-      case response.status
-      when HttpStatusCodes::HTTP_BAD_REQUEST_CODE
-        BadRequestError
-      when HttpStatusCodes::HTTP_NOT_FOUND_CODE
-        NotFoundError
-      when HttpStatusCodes::HTTP_FORBIDDEN_CODE
-        ForbiddenError
-      when HttpStatusCodes::HTTP_UNAUTHORIZED_CODE
-        UnauthorizedError  
-      when HttpStatusCodes::HTTP_UNPROCESSABLE_ENTITY_CODE
-        UnprocessableEntityError  
-      else
-        ApiError
-      end
+      }.to_json
     end
   end
 end

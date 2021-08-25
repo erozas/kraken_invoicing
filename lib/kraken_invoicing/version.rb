@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
 module KrakenInvoicing
-  VERSION = "0.1.1"
+  module VERSION
+    MAJOR = 0
+    MINOR = 1
+    TINY = 2
+    PRE = nil
+
+    STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')
+  end
 end

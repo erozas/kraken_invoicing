@@ -30,10 +30,19 @@ module KrakenInvoicing
   class NotFoundError < ApiError
   end
 
-  # It should be raised when the API call returns a 429 Error Code
+  # It should be raised when the API call returns a 422 Error Code
   class UnprocessableEntityError < ApiError
   end
 
+  # It should be raised when the API call returns a 429 Error Code
+  class TooManyRequestsError < ApiError
+  end
+
+  # It should be raised when the API call returns 500 error
+  class InternalServerError < ApiError
+  end
+
+  # It should be raised when we try to instantiate the client with no auth_token
   class TokenMissingError < ApiError
   end
 end

@@ -4,7 +4,7 @@ require_relative "lib/kraken_invoicing/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "kraken_invoicing"
-  spec.version       = KrakenInvoicing::VERSION
+  spec.version       = KrakenInvoicing::VERSION::STRING
   spec.authors       = ["Exequiel Rozas"]
   spec.email         = ["exequiel98@gmail.com"]
 
@@ -31,6 +31,7 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
   spec.add_dependency 'faraday'
+  spec.add_dependency 'faraday_middleware'
   spec.add_dependency 'oj'
 
   # For more information and examples about making a new gem, checkout our
