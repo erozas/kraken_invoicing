@@ -8,7 +8,7 @@ module KrakenInvoicing
       body = response.body
       new(
         data: body.map { |attrs| type.new(attrs) },
-        total: 20,
+        total: body.length,
         next_cursor: {},
         prev_cursor: {}
       )
