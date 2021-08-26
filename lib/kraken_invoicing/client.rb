@@ -9,9 +9,8 @@ module KrakenInvoicing
     attr_reader :auth_token, :adapter
 
     def initialize(auth_token = nil, adapter: Faraday.default_adapter, stubs: nil)
-      @auth_token = auth_token || KrakenInvoicing.configuration.auth_token || authenticate_and_return_auth_token
+      @auth_token = authenticate_if_expired_or_return_token(auth_token)
       @adapter = adapter
-
       @stubs = stubs
     end
 
@@ -36,16 +35,25 @@ module KrakenInvoicing
         conn.url_prefix = KrakenInvoicing.configuration.api_endpoint
         conn.request :json
         conn.response :json, content_type: 'application/json'
-        conn.adapter adapter, @stubs
+        conn.adapter Faraday.default_adapter, @stubs
       end
     end
 
     private
+    def authenticate_if_expired_or_return_token(text_token)
+      text_token = auth_token || KrakenInvoicing.configuration.auth_token
+      auth_token = AuthToken.new(text_token)
+
+      if auth_token.expired?
+        authenticate_and_return_auth_token
+      else
+        text_token
+      end
+    end
 
     def authenticate_and_return_auth_token
-      headers = { Authorization: "Bearer #{auth_token}" }
-      response = connection.post('/api/authenticate', headers.merge(connection.headers))
-      Oj.load(response.body)
+      response = connection.post("/api/authenticate", auth_params)
+      response.body["id_token"]
     end
 
     def auth_params
