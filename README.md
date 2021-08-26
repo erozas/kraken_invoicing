@@ -25,7 +25,7 @@ end
 ```
 En Rails puedes hacer esto creando un initializer como por ejemplo: */config/initializers/kraken.rb* pegando el código de arriba. Con esto tendrás acceso a las variables de configuración de manera global.
 
-Por ejemplo, podemos acceder al *client_id* dentro de otra clase haciendo **KrakenInvoicing.client_id**
+Por ejemplo, podemos acceder al *client_id* dentro de otra clase haciendo **KrakenInvoicing.configuration.client_id**
 
 ## Uso de la gema para hacer peticiones
 Para hacer peticiones usando esta gema necesitamos crear una instancia de KrakenInvoicing::Client.
