@@ -8,9 +8,8 @@ module KrakenInvoicing
   class Client
     attr_reader :auth_token, :adapter
 
-    def initialize(auth_token = nil, adapter: Faraday.default_adapter, stubs: nil)
+    def initialize(auth_token = nil, stubs: nil)
       @auth_token = authenticate_if_expired_or_return_token(auth_token)
-      @adapter = adapter
       @stubs = stubs
     end
 
