@@ -17,8 +17,10 @@ Para pasar esta información usamos el método *.configure* de la clase KrakenIn
 ```ruby
 KrakenInvoicing.configure do |config|
   config.api_endpoint = 'https://endpoint-suministrado-por-kraken.com'
+  config.auth_token = 'unTokenObtenidoPreviamente' 
   config.cliend_id = 'id_de_cliente_suministrador_por_kraken'
   config.client_secret = 'secreto_del_cliente_suministrado_por_kraken'
+  config.remember_me = true
 end
 ```
 En Rails puedes hacer esto creando un initializer como por ejemplo: */config/initializers/kraken.rb* pegando el código de arriba. Con esto tendrás acceso a las variables de configuración de manera global.
@@ -26,11 +28,11 @@ En Rails puedes hacer esto creando un initializer como por ejemplo: */config/ini
 Por ejemplo, podemos acceder al *client_id* dentro de otra clase haciendo **KrakenInvoicing.client_id**
 
 ## Uso de la gema para hacer peticiones
-Para hacer peticiones usando esta gema necesitamos instanciar un cliente usando:
-
+Para hacer peticiones usando esta gema necesitamos crear una instancia de KrakenInvoicing::Client.
 ```ruby
-client = KrakenInvoicing::Client.new(token) # Instanciamos un nuevo cliente de Kraken pasándole el JWT con el que nos autenticaremos
-client.branches # Devuelve todas las sucursales del negocio
-client.invoice(invoice_id) # Devuelve toda la información acerca de una factura
-client.invoice_pdf(invoice_id) # Devuelve una factura en específico en formato PDF
+# Le pasamos un token de autenticación previamente obtenido
+client = KrakenInvoicing::Client.new(auth_token)
+
+# El cliente se autentica utilizando la información de configuración que tenemos en el initializer
+client = KrakenInvoicing::Client.new()
 ```
