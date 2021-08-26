@@ -40,7 +40,7 @@ module KrakenInvoicing
 
     private
     def authenticate_if_expired_or_return_token(text_token)
-      text_token = auth_token || KrakenInvoicing.configuration.auth_token
+      text_token ||= KrakenInvoicing.configuration.auth_token
       auth_token = AuthToken.new(text_token)
 
       if auth_token.expired?
@@ -51,8 +51,8 @@ module KrakenInvoicing
     end
 
     def authenticate_and_return_auth_token
-      response = connection.post("/api/authenticate", auth_params)
-      response.body["id_token"]
+      response = connection.post('/api/authenticate', auth_params)
+      response.body['id_token']
     end
 
     def auth_params
