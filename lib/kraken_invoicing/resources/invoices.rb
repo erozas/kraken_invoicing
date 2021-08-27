@@ -11,8 +11,8 @@ module KrakenInvoicing
       Invoice.new get_request("/api/invoices/#{invoice_id}", params: {}).body
     end
 
-    def create(**attributes)
-      Invoice.new post_request("/api/invoices", body: attributes).body
+    def create(invoice_params)
+      Invoice.new post_request("/api/invoices", body: invoice_params).body
     end
 
     def send_by_email(email, invoice_id)
