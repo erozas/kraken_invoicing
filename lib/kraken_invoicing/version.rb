@@ -3,7 +3,7 @@
 module KrakenInvoicing
   module VERSION
     MAJOR = 0
-    MINOR = 1
+    MINOR = 2
     TINY = 3
     PRE = nil
 
