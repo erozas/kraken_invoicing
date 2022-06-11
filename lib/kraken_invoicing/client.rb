@@ -21,8 +21,16 @@ module KrakenInvoicing
       ActivitiesResource.new(self)
     end
 
+    def current_company
+      CompaniesResource.new(self)
+    end
+
     def cycles
       CyclesResource.new(self)
+    end
+
+    def document_types
+      DocumentTypesResource.new(self)
     end
 
     def invoices
@@ -39,11 +47,12 @@ module KrakenInvoicing
     end
 
     private
+
     def authenticate_if_expired_or_return_token(text_token)
       text_token ||= KrakenInvoicing.configuration.auth_token
-      auth_token = AuthToken.new(text_token)
+      auth_token = AuthToken.new(text_token) unless text_token.empty? || text_token.nil?
 
-      if auth_token.expired?
+      if !auth_token || auth_token.expired?
         authenticate_and_return_auth_token
       else
         text_token
@@ -51,7 +60,7 @@ module KrakenInvoicing
     end
 
     def authenticate_and_return_auth_token
-      response = connection.post('/api/authenticate', auth_params)
+      response = connection.post('/gateway/api/authenticate', auth_params)
       response.body['id_token']
     end
 

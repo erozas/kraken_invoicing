@@ -16,12 +16,16 @@ module KrakenInvoicing
 
   autoload :ActivitiesResource, 'kraken_invoicing/resources/activities'
   autoload :BranchesResource, 'kraken_invoicing/resources/branches'
+  autoload :CompaniesResource, 'kraken_invoicing/resources/companies'
   autoload :CyclesResource, 'kraken_invoicing/resources/cycles'
+  autoload :DocumentTypesResource, 'kraken_invoicing/resources/document_types'
   autoload :InvoicesResource, 'kraken_invoicing/resources/invoices'
 
   autoload :Activity, 'kraken_invoicing/objects/activity'
   autoload :Branch, 'kraken_invoicing/objects/branch'
+  autoload :Company, 'kraken_invoicing/objects/company'
   autoload :Cycle, 'kraken_invoicing/objects/activity'
+  autoload :DocumentType, 'kraken_invoicing/objects/document_type'
   autoload :Invoice, 'kraken_invoicing/objects/invoice'
 
   autoload :UnauthorizedError, 'kraken_invoicing/api_error'

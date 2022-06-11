@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require "bundler/setup"
-require "kraken_invoicing"
+require 'bundler/setup'
+require 'kraken_invoicing'
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
@@ -12,14 +12,14 @@ require "kraken_invoicing"
 # Pry.start
 
 KrakenInvoicing.configure do |config|
-  config.api_endpoint = ENV["KRAKEN_API_ENDPOINT"]
-  config.auth_token = ENV["KRAKEN_AUTH_TOKEN"]
-  config.client_id = ENV["KRAKEN_CLIENT_ID"]
-  config.client_secret = ENV["KRAKEN_CLIENT_SECRET"]
+  config.api_endpoint = ENV['KRAKEN_BASE_URL']
+  config.auth_token = ENV['KRAKEN_AUTH_TOKEN']
+  config.client_id = ENV['KRAKEN_CLIENT_ID']
+  config.client_secret = ENV['KRAKEN_CLIENT_SECRET']
   config.remember_me = true
 end
 
 client = KrakenInvoicing::Client.new
 
-require "irb"
+require 'irb'
 IRB.start(__FILE__)

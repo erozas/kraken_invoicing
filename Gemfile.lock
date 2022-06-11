@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kraken_invoicing (0.1.2)
+    kraken_invoicing (0.2.3)
       faraday
       faraday_middleware
       jwt
