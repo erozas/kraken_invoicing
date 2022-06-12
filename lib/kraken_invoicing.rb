@@ -25,6 +25,7 @@ module KrakenInvoicing
   autoload :MeasurementUnitsResource, 'kraken_invoicing/resources/measurement_units'
   autoload :NitResource, 'kraken_invoicing/resources/nit'
   autoload :PaymentMethodsResource, 'kraken_invoicing/resources/payment_methods'
+  autoload :PointsOfSaleResource, 'kraken_invoicing/resources/points_of_sale'
   autoload :ProductsResource, 'kraken_invoicing/resources/products'
 
   autoload :Activity, 'kraken_invoicing/objects/activity'
@@ -38,6 +39,7 @@ module KrakenInvoicing
   autoload :MeasurementUnit, 'kraken_invoicing/objects/measurement_unit'
   autoload :Nit, 'kraken_invoicing/objects/nit'
   autoload :PaymentMethod, 'kraken_invoicing/objects/payment_method'
+  autoload :PointOfSale, 'kraken_invoicing/objects/point_of_sale'
   autoload :Product, 'kraken_invoicing/objects/product'
 
   autoload :UnauthorizedError, 'kraken_invoicing/api_error'
