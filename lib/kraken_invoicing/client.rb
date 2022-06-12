@@ -21,6 +21,10 @@ module KrakenInvoicing
       ActivitiesResource.new(self)
     end
 
+    def cancellation_reasons
+      CancellationReasonsResource.new(self)
+    end
+
     def current_company
       CompaniesResource.new(self)
     end

@@ -16,6 +16,7 @@ module KrakenInvoicing
 
   autoload :ActivitiesResource, 'kraken_invoicing/resources/activities'
   autoload :BranchesResource, 'kraken_invoicing/resources/branches'
+  autoload :CancellationReasonsResource, 'kraken_invoicing/resources/cancellation_reasons'
   autoload :CompaniesResource, 'kraken_invoicing/resources/companies'
   autoload :CyclesResource, 'kraken_invoicing/resources/cycles'
   autoload :DocumentTypesResource, 'kraken_invoicing/resources/document_types'
@@ -28,6 +29,7 @@ module KrakenInvoicing
 
   autoload :Activity, 'kraken_invoicing/objects/activity'
   autoload :Branch, 'kraken_invoicing/objects/branch'
+  autoload :CancellationReason, 'kraken_invoicing/objects/cancellation_reason'
   autoload :Company, 'kraken_invoicing/objects/company'
   autoload :Cycle, 'kraken_invoicing/objects/activity'
   autoload :DocumentType, 'kraken_invoicing/objects/document_type'
