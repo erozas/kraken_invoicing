@@ -37,6 +37,10 @@ module KrakenInvoicing
       InvoicesResource.new(self)
     end
 
+    def invoice_legends
+      InvoiceLegendsResource.new(self)
+    end
+
     def measurement_units
       MeasurementUnitsResource.new(self)
     end
