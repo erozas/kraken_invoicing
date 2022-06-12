@@ -25,6 +25,10 @@ module KrakenInvoicing
       CancellationReasonsResource.new(self)
     end
 
+    def currency_types
+      CurrencyTypesResource.new(self)
+    end
+
     def current_company
       CompaniesResource.new(self)
     end
