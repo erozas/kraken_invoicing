@@ -77,6 +77,10 @@ module KrakenInvoicing
       SignificativeEventsResource.new(self)
     end
 
+    def sin_response_codes
+      SinResponseCodesResource.new(self)
+    end
+
     def connection
       @connection ||= Faraday.new do |conn|
         conn.url_prefix = KrakenInvoicing.configuration.api_endpoint

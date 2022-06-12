@@ -29,6 +29,7 @@ module KrakenInvoicing
   autoload :PointsOfSaleResource, 'kraken_invoicing/resources/points_of_sale'
   autoload :ProductsResource, 'kraken_invoicing/resources/products'
   autoload :SignificativeEventsResource, 'kraken_invoicing/resources/significative_events'
+  autoload :SinResponseCodesResource, 'kraken_invoicing/resources/sin_response_codes'
 
   autoload :Activity, 'kraken_invoicing/objects/activity'
   autoload :Branch, 'kraken_invoicing/objects/branch'
@@ -45,6 +46,7 @@ module KrakenInvoicing
   autoload :PointOfSale, 'kraken_invoicing/objects/point_of_sale'
   autoload :Product, 'kraken_invoicing/objects/product'
   autoload :SignificativeEvent, 'kraken_invoicing/objects/significative_event'
+  autoload :SinResponseCode, 'kraken_invoicing/objects/sin_response_code'
 
   autoload :UnauthorizedError, 'kraken_invoicing/api_error'
   autoload :BadRequestError, 'kraken_invoicing/api_error'
