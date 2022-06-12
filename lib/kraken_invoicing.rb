@@ -21,6 +21,7 @@ module KrakenInvoicing
   autoload :DocumentTypesResource, 'kraken_invoicing/resources/document_types'
   autoload :InvoicesResource, 'kraken_invoicing/resources/invoices'
   autoload :MeasurementUnitsResource, 'kraken_invoicing/resources/measurement_units'
+  autoload :PaymentMethodsResource, 'kraken_invoicing/resources/payment_methods'
 
   autoload :Activity, 'kraken_invoicing/objects/activity'
   autoload :Branch, 'kraken_invoicing/objects/branch'
@@ -29,6 +30,7 @@ module KrakenInvoicing
   autoload :DocumentType, 'kraken_invoicing/objects/document_type'
   autoload :Invoice, 'kraken_invoicing/objects/invoice'
   autoload :MeasurementUnit, 'kraken_invoicing/objects/measurement_unit'
+  autoload :PaymentMethod, 'kraken_invoicing/objects/payment_method'
 
   autoload :UnauthorizedError, 'kraken_invoicing/api_error'
   autoload :BadRequestError, 'kraken_invoicing/api_error'

@@ -41,6 +41,10 @@ module KrakenInvoicing
       MeasurementUnitsResource.new(self)
     end
 
+    def payment_methods
+      PaymentMethodsResource.new(self)
+    end
+
     def connection
       @connection ||= Faraday.new do |conn|
         conn.url_prefix = KrakenInvoicing.configuration.api_endpoint
