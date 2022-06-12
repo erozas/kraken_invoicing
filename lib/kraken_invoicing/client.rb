@@ -61,6 +61,10 @@ module KrakenInvoicing
       NitResource.new(self)
     end
 
+    def origin_countries
+      OriginCountriesResource.new(self)
+    end
+
     def points_of_sale
       PointsOfSaleResource.new(self)
     end
