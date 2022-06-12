@@ -3,7 +3,7 @@
 module KrakenInvoicing
   class InvoicesResource < Resource
     def list(**params)
-      response = get_request("/api/invoices", params: params)
+      response = get_request('/api/invoices', params: params)
       Collection.from_response(response, type: Invoice)
     end
 
@@ -11,16 +11,12 @@ module KrakenInvoicing
       Invoice.new get_request("/api/invoices/#{invoice_id}", params: {}).body
     end
 
-    def create(invoice_params)
-      Invoice.new post_request("/api/invoices", body: invoice_params).body
+    def buy_and_sell_create(**params)
+      response = post_request('/msinvoice/api/integrations/create-invoice/buy-and-sell', params: params)
     end
 
-    def send_by_email(email, invoice_id)
-      get_request("/api/invoices/#{email}/#{invoice_id}/send_mail", params: {})
-    end
-
-    def get_pdf(invoice_id)
-      get_request("/api/invoices/#{invoice_id}/pdf", params: { binary: true })
+    def cancel(**params)
+      response = post_request('/msinvoice/api/integrations/cancel', params: params)
     end
   end
 end

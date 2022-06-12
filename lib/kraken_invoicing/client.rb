@@ -69,6 +69,10 @@ module KrakenInvoicing
       PaymentMethodsResource.new(self)
     end
 
+    def significative_events
+      SignificativeEventsResource.new(self)
+    end
+
     def connection
       @connection ||= Faraday.new do |conn|
         conn.url_prefix = KrakenInvoicing.configuration.api_endpoint
