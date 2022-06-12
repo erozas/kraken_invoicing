@@ -19,8 +19,10 @@ module KrakenInvoicing
   autoload :CompaniesResource, 'kraken_invoicing/resources/companies'
   autoload :CyclesResource, 'kraken_invoicing/resources/cycles'
   autoload :DocumentTypesResource, 'kraken_invoicing/resources/document_types'
+  autoload :InvoiceLegendsResource, 'kraken_invoicing/resources/invoice_legends'
   autoload :InvoicesResource, 'kraken_invoicing/resources/invoices'
   autoload :MeasurementUnitsResource, 'kraken_invoicing/resources/measurement_units'
+  autoload :NitResource, 'kraken_invoicing/resources/nit'
   autoload :PaymentMethodsResource, 'kraken_invoicing/resources/payment_methods'
   autoload :ProductsResource, 'kraken_invoicing/resources/products'
 
@@ -30,7 +32,9 @@ module KrakenInvoicing
   autoload :Cycle, 'kraken_invoicing/objects/activity'
   autoload :DocumentType, 'kraken_invoicing/objects/document_type'
   autoload :Invoice, 'kraken_invoicing/objects/invoice'
+  autoload :InvoiceLegend, 'kraken_invoicing/objects/invoice_legend'
   autoload :MeasurementUnit, 'kraken_invoicing/objects/measurement_unit'
+  autoload :Nit, 'kraken_invoicing/objects/nit'
   autoload :PaymentMethod, 'kraken_invoicing/objects/payment_method'
   autoload :Product, 'kraken_invoicing/objects/product'
 

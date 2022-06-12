@@ -6,7 +6,7 @@ require 'json'
 
 module KrakenInvoicing
   class Client
-    attr_reader :auth_token, :adapter
+    attr_reader :auth_token, :adapter, :stubs
 
     def initialize(auth_token = nil, stubs: nil)
       @auth_token = authenticate_if_expired_or_return_token(auth_token)
@@ -41,7 +41,13 @@ module KrakenInvoicing
       MeasurementUnitsResource.new(self)
     end
 
-    def nit_check(nit); end
+    def invoice_legends
+      InvoiceLegendsResource.new(self)
+    end
+
+    def nit
+      NitResource.new(self)
+    end
 
     def products
       ProductsResource.new(self)
