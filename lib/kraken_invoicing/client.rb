@@ -41,6 +41,12 @@ module KrakenInvoicing
       MeasurementUnitsResource.new(self)
     end
 
+    def nit_check(nit); end
+
+    def products
+      ProductsResource.new(self)
+    end
+
     def payment_methods
       PaymentMethodsResource.new(self)
     end
