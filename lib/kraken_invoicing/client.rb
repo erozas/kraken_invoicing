@@ -53,10 +53,6 @@ module KrakenInvoicing
       MeasurementUnitsResource.new(self)
     end
 
-    def invoice_legends
-      InvoiceLegendsResource.new(self)
-    end
-
     def nit
       NitResource.new(self)
     end
