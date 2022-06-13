@@ -11,8 +11,8 @@ module KrakenInvoicing
       Invoice.new get_request("/api/invoices/#{invoice_id}", params: {}).body
     end
 
-    def buy_and_sell_create(**params)
-      response = post_request('/msinvoice/api/integrations/create-invoice/buy-and-sell', params: params)
+    def buy_and_sell_create(**body)
+      response = post_request('/msinvoice/api/integrations/create-invoice/buy-and-sell', body: body)
     end
 
     def cancel(**params)
