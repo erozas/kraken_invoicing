@@ -29,7 +29,7 @@ module KrakenInvoicing
       CurrencyTypesResource.new(self)
     end
 
-    def current_company
+    def companies
       CompaniesResource.new(self)
     end
 
