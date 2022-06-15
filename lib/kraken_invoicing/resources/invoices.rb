@@ -15,6 +15,30 @@ module KrakenInvoicing
       response = post_request('/msinvoice/api/integrations/create-invoice/buy-and-sell', body: body)
     end
 
+    def get_pdf_by_id(invoice_id)
+      response = get_request("/msinvoice/api/integrations/by-id/#{invoice_id}/pdf?invoiceFormat=ROLL")
+    end
+
+    def get_xml_by_id(invoice_id)
+      response = get_request("/msinvoice/api/integrations/by-id/#{invoice_id}/xml")
+    end
+
+    def get_base64_by_id(invoice_id)
+      response = get_request("/msinvoice/api/integrations/by-id/#{invoice_id}/base64")
+    end
+
+    def get_pdf_by_cuf(cuf_code)
+      response = get_request("/msinvoice/api/integrations/by-cuf/#{cuf_code}/pdf")
+    end
+
+    def get_xml_by_cuf(cuf_code)
+      response = get_request("/msinvoice/api/integrations/by-cuf/#{cuf_code}/xml")
+    end
+
+    def get_base64_by_cuf(cuf_code)
+      response = get_request("/msinvoice/api/integrations/by-cuf/#{cuf_code}/base64")
+    end
+
     def cancel(**params)
       response = post_request('/msinvoice/api/integrations/cancel', params: params)
     end
