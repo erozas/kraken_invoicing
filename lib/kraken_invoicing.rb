@@ -29,6 +29,7 @@ module KrakenInvoicing
   autoload :PaymentMethodsResource, 'kraken_invoicing/resources/payment_methods'
   autoload :PointsOfSaleResource, 'kraken_invoicing/resources/points_of_sale'
   autoload :ProductsResource, 'kraken_invoicing/resources/products'
+  autoload :SiatProductCodesResource, 'kraken_invoicing/resources/siat_product_codes'
   autoload :SignificativeEventsResource, 'kraken_invoicing/resources/significative_events'
   autoload :SinResponseCodesResource, 'kraken_invoicing/resources/sin_response_codes'
 
@@ -47,6 +48,7 @@ module KrakenInvoicing
   autoload :PaymentMethod, 'kraken_invoicing/objects/payment_method'
   autoload :PointOfSale, 'kraken_invoicing/objects/point_of_sale'
   autoload :Product, 'kraken_invoicing/objects/product'
+  autoload :SiatProductCode, 'kraken_invoicing/objects/siat_product_code'
   autoload :SignificativeEvent, 'kraken_invoicing/objects/significative_event'
   autoload :SinResponseCode, 'kraken_invoicing/objects/sin_response_code'
 

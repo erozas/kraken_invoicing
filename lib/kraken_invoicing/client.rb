@@ -77,6 +77,10 @@ module KrakenInvoicing
       SignificativeEventsResource.new(self)
     end
 
+    def siat_product_codes
+      SiatProductCodesResource.new(self)
+    end
+
     def sin_response_codes
       SinResponseCodesResource.new(self)
     end

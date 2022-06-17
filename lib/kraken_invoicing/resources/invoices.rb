@@ -15,7 +15,7 @@ module KrakenInvoicing
       response = post_request('/msinvoice/api/integrations/create-invoice/buy-and-sell', body: body)
     end
 
-    def get_pdf_by_id(invoice_id, invoice_format)
+    def get_pdf_by_id(invoice_id, invoice_format = '')
       response = get_request("/msinvoice/api/integrations/by-id/#{invoice_id}/pdf?invoiceFormat=#{invoice_format}")
     end
 
